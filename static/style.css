@@ -67,7 +67,7 @@ body {
 }
 
 /* -------------------------------
-   Botões
+   Botões principais
 --------------------------------- */
 .button-group {
     display: grid;
@@ -103,23 +103,6 @@ button.postar:hover {
     background-color: #218838;
 }
 
-/* Botão Deletar (vermelho) */
-button.deletar {
-    background-color: #dc3545;
-}
-button.deletar:hover {
-    background-color: #c82333;
-}
-
-/* Botão Atualizar/Put (amarelo, opcional) */
-button.atualizar {
-    background-color: #ffc107;
-    color: #333;
-}
-button.atualizar:hover {
-    background-color: #e0a800;
-}
-
 /* -------------------------------
    Lista de Categorias
 --------------------------------- */
@@ -132,17 +115,71 @@ button.atualizar:hover {
     list-style: none;
 }
 
-#categoryList li {
+.category-item {
     background-color: #f8f9fb;
     padding: 10px 14px;
     margin-bottom: 8px;
     border-left: 4px solid #4a90e2;
     border-radius: 6px;
     transition: background-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
 }
 
-#categoryList li:hover {
+.category-item:hover {
     background-color: #e6eef9;
+}
+
+/* Botões dentro da lista */
+.action-buttons {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+#categoryList button.deletar {
+    background-color: #dc3545; /* vermelho */
+}
+#categoryList button.deletar:hover {
+    background-color: #c82333;
+}
+
+#categoryList button.editar {
+    background-color: #6f42c1; /* roxo */
+}
+#categoryList button.editar:hover {
+    background-color: #5a32a3;
+}
+
+/* -------------------------------
+   Inputs de Edição
+--------------------------------- */
+.edit-container {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.edit-input {
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #dcdcdc;
+    border-radius: 8px;
+    flex: 1;
+    transition: border-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+.edit-input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.edit-container button.atualizar {
+    background-color: #17a2b8; /* azul claro */
+}
+.edit-container button.atualizar:hover {
+    background-color: #138496;
 }
 
 /* -------------------------------
@@ -160,20 +197,21 @@ button.atualizar:hover {
     #title {
         font-size: 24px;
     }
-}
 
-/* Botões dentro da lista de categorias */
-#categoryList button {
-    background-color: #dc3545; /* vermelho */
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.3s;
-}
+    .category-item {
+        flex-direction: column;
+    }
 
-#categoryList button:hover {
-    background-color: #c82333;
+    .action-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .edit-container {
+        flex-direction: column;
+    }
+
+    .edit-container button.atualizar {
+        width: 100%;
+    }
 }
