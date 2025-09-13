@@ -2,68 +2,9 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador de Categorias</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
-            padding: 30px;
-            color: #333;
-        }
-        #container {
-            max-width: 600px;
-            margin: auto;
-            padding: 25px;
-            background: white;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-            border-radius: 10px;
-        }
-        #title {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        button {
-            flex: 1;
-            margin: 0 5px;
-            padding: 12px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        #categoryList div {
-            margin-bottom: 10px;
-            padding: 10px;
-            background: #f9f9f9;
-            border-radius: 6px;
-            border: 1px solid #ddd;
-        }
-        #categoryList button {
-            background: #dc3545;
-            margin-top: 5px;
-        }
-        #categoryList button:hover {
-            background: #c82333;
-        }
-    </style>
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
     <div id="container">
@@ -72,69 +13,13 @@
         <input type="text" id="categoryName" placeholder="Digite o nome da categoria">
 
         <div class="button-group">
-            <button onclick="createCategory()">Postar</button>
-            <button onclick="listCategories()">Listar</button>
+            <button class="postar" onclick="createCategory()">Postar</button>
+            <button class="listar" onclick="listCategories()">Listar</button>
         </div>
 
         <div id="categoryList"></div>
     </div>
 
-    <script>
-        function createCategory() {
-            const name = document.getElementById("categoryName").value;
-            if (!name) return alert("Digite um nome válido.");
-
-            fetch("/api/categories", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ name })
-            })
-            .then(res => res.json())
-            .then(data => {
-                alert(data.message || "Categoria criada.");
-                document.getElementById("categoryName").value = "";
-            })
-            .catch(err => alert("Erro ao criar categoria."));
-        }
-
-        function listCategories() {
-            fetch("/api/categories")
-            .then(res => res.json())
-            .then(categories => {
-                const list = document.getElementById("categoryList");
-                list.innerHTML = "";
-                if (categories.length === 0) {
-                    list.innerHTML = "<p>Nenhuma categoria encontrada.</p>";
-                    return;
-                }
-
-                categories.forEach(cat => {
-                    const item = document.createElement("div");
-                    item.innerHTML = `
-                        <p><strong>ID:</strong> ${cat.id} | <strong>Nome:</strong> ${cat.name}</p>
-                        <button onclick="deleteCategory(${cat.id})">Deletar</button>
-                    `;
-                    list.appendChild(item);
-                });
-            })
-            .catch(err => alert("Erro ao listar categorias."));
-        }
-
-        function deleteCategory(id) {
-            if (!confirm("Deseja realmente deletar essa categoria?")) return;
-
-            fetch(`/api/categories/${id}`, {
-                method: "DELETE"
-            })
-            .then(res => res.json())
-            .then(data => {
-                alert(data.message || "Categoria deletada.");
-                listCategories();
-            })
-            .catch(err => alert("Erro ao deletar categoria."));
-        }
-    </script>
+    <script src="static/script.js"></script>
 </body>
 </html>
