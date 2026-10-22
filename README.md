@@ -1,4 +1,4 @@
-# CRUD Web App com Flask, SQLite e API RESTful 
+# CRUD Web App com Flask, SQLite e API RESTful
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue) ![Flask](https://img.shields.io/badge/Flask-2.3-lightgrey) ![SQLite](https://img.shields.io/badge/SQLite-3.42-blueviolet) ![REST API](https://img.shields.io/badge/REST-API-green)
 
